@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWI Prediction - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@800;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #080b12;
+            color: #dde4f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Grid overlay background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(0deg, rgba(56, 189, 248, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.025) 1px, transparent 1px);
+            background-size: 44px 44px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Headings */
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 48px;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, #38bdf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            color: #38bdf8;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #8a9abf;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* Hero section */
+        .hero {
+            margin-bottom: 60px;
+        }
+
+        /* Feature cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #0d1120 0%, #111827 100%);
+            border: 1px solid #1e2a42;
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 20px 60px rgba(56, 189, 248, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(56, 189, 248, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .feature-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #dde4f5;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #8a9abf;
+            line-height: 1.8;
+        }
+
+        /* Parameter info */
+        .parameters {
+            background: linear-gradient(135deg, #0d1120 0%, #111827 100%);
+            border: 1px solid #1e2a42;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .parameter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .parameter-item {
+            background-color: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .parameter-item strong {
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .parameter-item span {
+            color: #8a9abf;
+            font-size: 13px;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .btn-predict {
+            display: inline-block;
+            padding: 16px 48px;
+            background: linear-gradient(90deg, #f97316, #fbbf24);
+            color: #080b12;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.2);
+            text-decoration: none;
+        }
+
+        .btn-predict:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-predict:active {
+            transform: translateY(-1px);
+        }
+
+        /* Info section */
+        .info-section {
+            background: linear-gradient(135deg, rgba(52, 211, 153, 0.05) 0%, rgba(56, 189, 248, 0.05) 100%);
+            border: 1px solid #1e2a42;
+            border-left: 4px solid #34d399;
+            border-radius: 12px;
+            padding: 32px 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .info-section h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            color: #34d399;
+            margin-bottom: 16px;
+        }
+
+        .info-section p {
+            color: #8a9abf;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid #1e2a42;
+            color: #4a5a80;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .parameters {
+                padding: 24px 20px;
+            }
+
+            .btn-predict {
+                padding: 14px 40px;
+                font-size: 16px;
+            }
+
+            .parameter-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>Fire Weather Index Prediction</h1>
+            <p class="subtitle">Advanced ML-powered forecasting for forest fire risk assessment</p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <h3>Real-Time Predictions</h3>
+                <p>Get instant FWI predictions based on current meteorological conditions and forest fire indices.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Advanced ML Model</h3>
+                <p>Powered by Ridge Regression, trained on extensive fire weather data for accurate forecasting.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Results</h3>
+                <p>Fast and efficient predictions with automatic feature scaling for optimal accuracy.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="/prediction" class="btn-predict">Start Prediction</a>
+        </div>
+
+        <div class="parameters">
+            <h2>Required Parameters</h2>
+            <p style="color: #8a9abf; margin-bottom: 20px;">Enter these meteorological and forest fire indices to generate predictions:</p>
+            <div class="parameter-grid">
+                <div class="parameter-item">
+                    <strong>Temperature</strong>
+                    <span>Air temperature in °C</span>
+                </div>
+                <div class="parameter-item">
+                    <strong>RH</strong>
+                    <span>Relative Humidity in %</span>
+                </div>
+                <div class="parameter-item">
+                    <strong>Ws</strong>
+                    <span>Wind Speed in km/h</span>
+                </div>
+                <div class="parameter-item">
+                    <strong>Rain</strong>
+                    <span>Rainfall in mm</span>
+                </div>
+                <div class="parameter-item">
+                    <strong>FFMC</strong>
+                    <span>Fine Fuel Moisture Code</span>
+                </div>
+                <div class="parameter-item">
+                    <strong>DMC</strong>
+                    <span>Duff Moisture Code</span>
+                </div>
+                <div class="parameter-item">
+                    <strong>ISI</strong>
+                    <span>Initial Spread Index</span>
+                </div>
+                <div class="parameter-item">
+                    <strong>Classes</strong>
+                    <span>Forest Classes Category</span>
+                </div>
+                <div class="parameter-item">
+                    <strong>Region</strong>
+                    <span>Geographic Region Code</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>📖 About FWI Index</h3>
+            <p>The Fire Weather Index (FWI) is a standardized system used by meteorologists and foresters to assess fire danger. It combines weather conditions with fuel moisture codes to provide a comprehensive measurement of forest fire danger. Values range from 0-100+, with higher values indicating increased fire danger and risk.</p>
+        </div>
+
+        <footer>
+            <p>FWI Prediction System | Powered by Ridge Regression ML Model</p>
+        </footer>
+    </div>
+</body>
+</html>
