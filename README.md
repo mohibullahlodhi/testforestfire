@@ -23,7 +23,7 @@ ridge_workspace/
 ├── templates/
 │   ├── index.html          # Home page
 │   └── predict.html        # Prediction form and results page
-└── notebook/               # Jupyter notebooks for model development
+└── notebook/               # Jupyter notebooks for model development.
 ```
 
 ## Installation
