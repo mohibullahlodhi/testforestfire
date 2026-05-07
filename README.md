@@ -6,7 +6,7 @@ A Flask-based web application for predicting the Fire Weather Index (FWI) using 
 
 - **Web Interface**: User-friendly dark-themed dashboard for entering fire weather parameters.
 - **Ridge Regression Model**: Pre-trained machine learning model for accurate FWI predictions.
-- **Real-time Predictions**: Instant results based on input parameters
+- **Real-time Predictions**: Instant results based on input parameters.
 - **Data Normalization**: Automatic feature scaling using StandardScaler for consistent predictions
 - **Responsive Design**: Modern, developer-friendly dark interface with grid overlay aesthetics
 - **Flask Backend**: Lightweight and efficient backend API
